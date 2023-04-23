@@ -40,6 +40,7 @@ protected:
 					? emit widgetVisibilityChanged(i, WidgetWas::Hidden)
 					: emit widgetVisibilityChanged(i, WidgetWas::Shown);
 			}
+			QTimer::singleShot(0, this, [&]() { emit resized(); });
 		}
 		return QSplitter::eventFilter(object, event);
 	}

@@ -48,12 +48,9 @@ protected:
 			
 			for (int i = 0; i < count(); ++i) {
 				auto widget = this->widget(i);
-				if (widget == nullptr) {
-					qDebug() << "Widget at index" << i << "has been removed from the QSplitter";
-				}
-				else {
-					qDebug() << "Widget at index" << i << "is still a child of the QSplitter";
-				}
+				(widget == nullptr)
+					? qDebug() << "Widget at index" << i << "has been removed from the QSplitter"
+					: qDebug() << "Widget at index" << i << "is still a child of the QSplitter";
 			}
 		}
 		return QSplitter::eventFilter(object, event);

@@ -45,10 +45,16 @@ protected:
 					qDebug() << "!!!" << widget(i) << ": eventFilter widgetVisibilityChanged signal (Shown)";
 				}
 			}
-			auto righthand_widget = widget(2);
-			(righthand_widget == nullptr)
-				? qDebug() << "The righthand widget has been removed from the QSplitter"
-				: qDebug() << "The righthand widget is still a child of the QSplitter";
+			
+			for (int i = 0; i < count(); ++i) {
+				auto widget = this->widget(i);
+				if (widget == nullptr) {
+					qDebug() << "Widget at index" << i << "has been removed from the QSplitter";
+				}
+				else {
+					qDebug() << "Widget at index" << i << "is still a child of the QSplitter";
+				}
+			}
 		}
 		return QSplitter::eventFilter(object, event);
 	}
@@ -64,8 +70,7 @@ protected:
 private:
 	void installFilters()
 	{
-		for (auto i = 0; i < count(); ++i) {
+		for (auto i = 0; i < count(); ++i)
 			widget(i)->installEventFilter(this);
-		}
 	}
 };

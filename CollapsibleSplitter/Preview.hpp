@@ -70,5 +70,5 @@ private:
 	WebDocument m_content;
 	WebEngineView* m_view = new WebEngineView(m_content, this);
 
-	QString url() { return QString("qrc:/Markdown.html"); }
+	QString url() { return QString("qrc:/Test.html"); }
 };

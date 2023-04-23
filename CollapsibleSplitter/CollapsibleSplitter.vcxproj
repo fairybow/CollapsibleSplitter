@@ -98,8 +98,9 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\README.md" />
     <None Include="cpp.hint" />
-    <None Include="Markdown.html" />
+    <None Include="Test.html" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TrueSplitter.hpp" />

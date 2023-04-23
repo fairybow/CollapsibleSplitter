@@ -37,9 +37,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
-    <None Include="Markdown.html">
+    <None Include="Test.html">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TrueSplitter.hpp">

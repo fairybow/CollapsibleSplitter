@@ -128,13 +128,13 @@ private:
 	int associatedHandle(int widgetIndex) { return (widgetIndex < m_centralWidgetIndex) ? widgetIndex + 1 : widgetIndex; }
 
 private slots:
-	void showOrHideButtons(int widgetIndex, TrueSplitter::WidgetSet visibility)
+	void showOrHideButtons(int widgetIndex, TrueSplitter::WidgetWas visibility)
 	{
 		for (auto& m_meta : m_metas) {
 			if (m_meta.widgetIndex != widgetIndex) continue;
 			auto button = m_meta.button();
 			if (button == nullptr) continue;
-			(visibility == TrueSplitter::WidgetSet::Hidden) ? button->hide() : button->show();
+			(visibility == TrueSplitter::WidgetWas::Hidden) ? button->hide() : button->show();
 		}
 	}
 };

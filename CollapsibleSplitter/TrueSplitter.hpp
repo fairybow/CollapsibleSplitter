@@ -13,7 +13,7 @@ class TrueSplitter : public QSplitter
 	Q_OBJECT
 
 public:
-	enum class WidgetSet {
+	enum class WidgetWas {
 		Hidden,
 		Shown
 	};
@@ -22,7 +22,7 @@ public:
 
 signals:
 	void resized();
-	void widgetVisibilityChanged(int widgetIndex, WidgetSet visibility);
+	void widgetVisibilityChanged(int widgetIndex, WidgetWas visibility);
 
 protected:
 	virtual void childEvent(QChildEvent* event) override
@@ -36,10 +36,19 @@ protected:
 	{
 		if (event->type() == QEvent::Show || event->type() == QEvent::Hide) {
 			for (auto i = 0; i < count(); ++i) {
-				!widget(i)->isVisible()
-					? emit widgetVisibilityChanged(i, WidgetSet::Hidden)
-					: emit widgetVisibilityChanged(i, WidgetSet::Shown);
+				if (!widget(i)->isVisible()) {
+					emit widgetVisibilityChanged(i, WidgetWas::Hidden);
+					qDebug() << "!!!" << widget(i) << ": eventFilter widgetVisibilityChanged signal (Hidden)";
+				}
+				else {
+					emit widgetVisibilityChanged(i, WidgetWas::Shown);
+					qDebug() << "!!!" << widget(i) << ": eventFilter widgetVisibilityChanged signal (Shown)";
+				}
 			}
+			auto righthand_widget = widget(2);
+			(righthand_widget == nullptr)
+				? qDebug() << "The righthand widget has been removed from the QSplitter"
+				: qDebug() << "The righthand widget is still a child of the QSplitter";
 		}
 		return QSplitter::eventFilter(object, event);
 	}

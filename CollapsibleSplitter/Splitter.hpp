@@ -39,6 +39,7 @@ public:
 			auto meta = Meta{ i };
 			if (i != centralWidgetIndex) {
 				auto button = new QPushButton(this);
+				button->setText(QString(isLeft(i) ? "Left Collapse" : "Right Collapse"));
 				meta.handleButton = button;
 			}
 			m_metas << meta;

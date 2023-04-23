@@ -39,8 +39,8 @@ public:
 			auto widget_i = m_trueSplitter->widget(i);
 			auto meta = Meta{ i };
 			if (i != centralWidgetIndex) {
-				auto button = new QPushButton(this);
-				button->setText(QString(isLeft(i) ? "Left Collapse" : "Right Collapse"));
+				auto button = new QPushButton(QString(isLeft(i) ? "Left Collapse" : "Right Collapse"), this);
+				//connect(button, &QPushButton::clicked, this, [&]() { emit askChangeMetaState(button); });
 				meta.handleButton = button;
 			}
 			m_metas << meta;

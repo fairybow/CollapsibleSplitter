@@ -28,7 +28,7 @@ protected:
 	virtual void childEvent(QChildEvent* event) override
 	{
 		if (event->type() == QEvent::ChildAdded && event->child()->isWidgetType())
-			installFilters();
+			event->child()->installEventFilter(this);
 		QSplitter::childEvent(event);
 	}
 
@@ -36,21 +36,9 @@ protected:
 	{
 		if (event->type() == QEvent::Show || event->type() == QEvent::Hide) {
 			for (auto i = 0; i < count(); ++i) {
-				if (!widget(i)->isVisible()) {
-					emit widgetVisibilityChanged(i, WidgetWas::Hidden);
-					qDebug() << "!!!" << widget(i) << ": eventFilter widgetVisibilityChanged signal (Hidden)";
-				}
-				else {
-					emit widgetVisibilityChanged(i, WidgetWas::Shown);
-					qDebug() << "!!!" << widget(i) << ": eventFilter widgetVisibilityChanged signal (Shown)";
-				}
-			}
-			
-			for (int i = 0; i < count(); ++i) {
-				auto widget = this->widget(i);
-				(widget == nullptr)
-					? qDebug() << "Widget at index" << i << "has been removed from the QSplitter"
-					: qDebug() << "Widget at index" << i << "is still a child of the QSplitter";
+				(!widget(i)->isVisible())
+					? emit widgetVisibilityChanged(i, WidgetWas::Hidden)
+					: emit widgetVisibilityChanged(i, WidgetWas::Shown);
 			}
 		}
 		return QSplitter::eventFilter(object, event);
@@ -63,11 +51,4 @@ protected:
 	}
 
 	virtual QSplitterHandle* createHandle() override { return new SplitterHandle(orientation(), this); }
-
-private:
-	void installFilters()
-	{
-		for (auto i = 0; i < count(); ++i)
-			widget(i)->installEventFilter(this);
-	}
 };

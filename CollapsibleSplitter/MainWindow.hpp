@@ -44,7 +44,6 @@ private:
 	QTreeView* m_treeView = new QTreeView(this);
 	QPlainTextEdit* m_editor = new QPlainTextEdit(this);
 	Preview* m_preview = new Preview(this);
-	//QTreeView* m_preview = new QTreeView(this);
 	Splitter* m_splitter = new Splitter(Qt::Horizontal, { m_treeView, m_editor, m_preview }, this);
 	QStatusBar* m_statusBar = new QStatusBar(this);
 };

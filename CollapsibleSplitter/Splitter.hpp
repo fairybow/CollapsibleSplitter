@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Layout.hpp"
 #include "TrueSplitter.hpp"
 
 #include <QByteArray>
@@ -7,7 +8,6 @@
 #include <QRect>
 #include <QResizeEvent>
 #include <QTimer>
-#include <QVBoxLayout>
 #include <QVector>
 
 #include <compare>
@@ -21,11 +21,7 @@ public:
 	Splitter(Qt::Orientation orientation, QVector<QWidget*> widgets, QWidget* parent)
 		: QWidget(parent)
 	{
-		auto layout = new QVBoxLayout(this);
-		layout->setContentsMargins(0, 0, 0, 0);
-		layout->setSpacing(0);
-		layout->addWidget(m_trueSplitter);
-		setLayout(layout);
+		Layout::setVBoxLayout(this, m_trueSplitter);
 		m_trueSplitter->setOrientation(orientation);
 		for (auto& widget : widgets) {
 			m_trueSplitter->addWidget(widget);
@@ -43,7 +39,6 @@ public:
 			auto meta = Meta{ i };
 			if (i != centralWidgetIndex) {
 				auto button = new QPushButton(this);
-				button->setObjectName("SplitterButton");
 				meta.handleButton = button;
 			}
 			m_metas << meta;

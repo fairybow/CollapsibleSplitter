@@ -106,13 +106,13 @@
     <QtMoc Include="TrueSplitter.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Preview.hpp" />
+    <ClInclude Include="Preview.hpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Splitter.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="SplitterHandle.hpp" />
+    <ClInclude Include="SplitterHandle.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Layout.hpp" />

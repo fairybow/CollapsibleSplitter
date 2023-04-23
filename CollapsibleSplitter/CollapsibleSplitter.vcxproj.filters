@@ -46,18 +46,18 @@
     <QtMoc Include="TrueSplitter.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Preview.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Splitter.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="SplitterHandle.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Layout.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SplitterHandle.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Preview.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

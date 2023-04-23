@@ -6,8 +6,6 @@
 
 class SplitterHandle : public QSplitterHandle
 {
-	Q_OBJECT
-
 public:
 	SplitterHandle(Qt::Orientation orientation, QSplitter* parent) : QSplitterHandle(orientation, parent) {}
 

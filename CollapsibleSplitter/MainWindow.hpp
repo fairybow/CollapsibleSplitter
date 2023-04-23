@@ -11,10 +11,10 @@
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    MainWindow(QWidget* parent = nullptr)
+	MainWindow(QWidget* parent = nullptr)
 		: QMainWindow(parent)
 	{
 		setGeometry(0, 0, 1000, 600);
@@ -22,23 +22,17 @@ public:
 		setMenuBar(m_menuBar);
 		setStatusBar(m_statusBar);
 		connect(m_splitter, &Splitter::askWindowSize, this, [&]() { return geometry(); });
-		//
-		auto toggle_tree_view = new QPushButton(m_statusBar);
-		auto toggle_preview = new QPushButton(m_statusBar);
+		auto toggle_tree_view = new QPushButton(this);
+		auto toggle_preview = new QPushButton(this);
 		toggle_tree_view->setText("Toggle TreeView");
 		toggle_preview->setText("Toggle Preview");
 		for (auto& button : { toggle_tree_view, toggle_preview }) {
+			m_statusBar->addPermanentWidget(button, 1);
 			button->setCheckable(true);
 			button->setChecked(true);
 		}
-		connect(toggle_tree_view, &QPushButton::toggled, this, [&](bool checked)
-			{
-				m_treeView->setVisible(checked);
-			});
-		connect(toggle_preview, &QPushButton::toggled, this, [&](bool checked)
-			{
-				m_preview->setVisible(checked);
-			});
+		connect(toggle_tree_view, &QPushButton::toggled, this, [&](bool checked) { m_treeView->setVisible(checked); });
+		connect(toggle_preview, &QPushButton::toggled, this, [&](bool checked) { m_preview->setVisible(checked); });
 		m_splitter->initialize({ 0.2, 0.4, 0.4 }, 1);
 	}
 

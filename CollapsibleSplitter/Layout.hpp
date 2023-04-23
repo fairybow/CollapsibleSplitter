@@ -2,11 +2,24 @@
 
 #include <QMainWindow>
 #include <QStackedLayout>
+#include <QVBoxLayout>
 #include <QVector>
 #include <QWidget>
 
 namespace Layout
 {
+	inline void setVBoxLayout(QWidget* parent, QVector<QWidget*> widgets)
+	{
+		auto layout = new QVBoxLayout(parent);
+		layout->setContentsMargins(0, 0, 0, 0);
+		layout->setSpacing(0);
+		for (auto& widget : widgets)
+			layout->addWidget(widget);
+		parent->setLayout(layout);
+	}
+
+	inline void setVBoxLayout(QWidget* parent, QWidget* widget) { setVBoxLayout(parent, QVector<QWidget*>{ widget }); }
+
 	inline void setCentralWidgets(QMainWindow* parentWindow, QVector<QWidget*> widgets)
 	{
 		auto container = new QWidget(parentWindow);

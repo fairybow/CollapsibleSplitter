@@ -12,18 +12,10 @@
 #include <QWebEngineView>
 #include <QWidget>
 
-class WebDocument : public QObject
-{
-	//Q_OBJECT
-
-public:
-	//explicit WebDocument(QObject* parent = nullptr) : QObject(parent) {}
-};
+class WebDocument : public QObject {};
 
 class WebEnginePage : public QWebEnginePage
 {
-	//Q_OBJECT
-
 public:
 	using QWebEnginePage::QWebEnginePage;
 
@@ -39,8 +31,6 @@ protected:
 
 class WebEngineView : public QWebEngineView
 {
-	Q_OBJECT
-
 public:
 	WebEngineView(WebDocument& content, QWidget* parent) : QWebEngineView(parent)
 	{
@@ -57,8 +47,6 @@ private:
 
 class Preview : public QWidget
 {
-	Q_OBJECT
-
 public:
 	Preview(QWidget* parent) : QWidget(parent)
 	{

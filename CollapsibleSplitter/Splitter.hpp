@@ -11,6 +11,7 @@
 #include <QVector>
 
 #include <compare>
+#include <numeric>
 #include <optional>
 
 class Splitter : public QWidget
@@ -46,7 +47,7 @@ public:
 			m_trueSplitter->setCollapsible(i, (i != centralWidgetIndex));
 			m_trueSplitter->setStretchFactor(i, (isCentral(i) || isRight(i)));
 		}
-		m_trueSplitter->setSizes(convertFallbacks(fallbacks));
+		m_trueSplitter->setSizes(verifyFallbacks(fallbacks));
 	}
 
 	QByteArray saveState() const { return m_trueSplitter->saveState(); }
@@ -90,8 +91,15 @@ private:
 			return Alignment::Central;
 	}
 
-	QVector<int> convertFallbacks(QVector<double> fallbacks)
+	QVector<int> verifyFallbacks(QVector<double> fallbacks)
 	{
+		auto total = std::accumulate(fallbacks.begin(), fallbacks.end(), 0.0);
+		if (total != 1.0) {
+			auto size = fallbacks.size();
+			auto adjustment = (1.0 - total) / size;
+			for (auto i = 0; i < size; ++i)
+				fallbacks[i] += adjustment;
+		}
 		QVector<int> sizes;
 		auto width = emit askWindowSize().width() - (m_trueSplitter->handleWidth() * (m_trueSplitter->count() - 1));
 		for (auto& fallback : fallbacks)
